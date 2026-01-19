@@ -15,9 +15,11 @@ pipeline {
 
         stage('Ejecutar tests') {
             steps {
-                sh 'npm test'
+                sh 'chmod +x ./node_modules/.bin/jest'  // Soluciona el problema de permisos
+                sh 'npm test -- --ci --runInBand'
             }
         }
+ 
 
         stage('Construir Imagen Docker') {
             when {
